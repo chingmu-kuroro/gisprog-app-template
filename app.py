@@ -36,7 +36,9 @@ def Page():
     solara.Title("YouBike 空站觀察")
     solara.Markdown("# 臺北 YouBike 各區空站比例")
 
-    solara.SliderInt("空站門檻：可借車 ≤", value=門檻, min=0, max=5)
+    # 滑桿預設會撐滿整個頁寬，用 Column 限制最大寬度，比較好操作。
+    with solara.Column(style={"max-width": "480px"}):
+        solara.SliderInt("空站門檻：可借車 ≤", value=門檻, min=0, max=5)
     solara.ToggleButtonsSingle(value=時段, values=時段們)
 
     當時 = df[df["時段"] == 時段.value]

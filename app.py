@@ -52,7 +52,12 @@ def Page():
         title=f"{時段.value}，可借車 ≤ {門檻.value} 算空站（只算營運中的站）",
         labels={"sarea": "", "空站比例": "空站比例"},
     )
-    圖.update_layout(yaxis={"categoryorder": "total ascending"}, xaxis_tickformat=".0%")
+    # 每區給 30 px 高度，行政區名稱才不會被 Plotly 自動隔行省略；換成區數更多的縣市也適用。
+    圖.update_layout(
+        yaxis={"categoryorder": "total ascending"},
+        xaxis_tickformat=".0%",
+        height=150 + 30 * len(表),
+    )
     solara.FigurePlotly(圖)
 
     solara.DataFrame(表)
